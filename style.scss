@@ -60,7 +60,6 @@ h2 {
 h3 {
   color: $orange;
   margin: 10px 0;
-  text-transform: lowercase;
   font-size: 1.25em;
 }
 
@@ -133,14 +132,12 @@ h3 {
   margin-top: 10px;
   margin-bottom: 0;
   font-size: 1.75em;
-  text-transform: lowercase;
   color: $darkest-blue;
 }
 .resume .base .profile .info .job {
   margin-top: 10px;
   margin-bottom: 0;
   font-size: 1.5em;
-  text-transform: lowercase;
   color: $darker-blue;
 }
 .resume .base .contact div {
@@ -244,7 +241,9 @@ h3 {
 .resume .func .work,
 .resume .func .edu {
   float: left;
+  margin: 0 0 15px 0;
 }
+
 .resume .func .work small,
 .resume .func .edu small {
   display: block;
@@ -323,6 +322,14 @@ h3 {
   padding: 15px;
   margin: 0 4% 15px 0;
 }
+
+.resume .func .languages {
+  clear: both;
+  background: $darker-blue;
+  padding: 15px;
+  margin: 0 0 15px 0;
+}
+
 .resume .func .edu {
   width: 48%;
   background: $darker-blue;
@@ -457,12 +464,70 @@ h3 {
   display: block;
 }
 
-.resume .func .other {
+.resume .func .qualifications {
+  clear: both;
   background: $darker-blue;
-  margin: 15px 0 0;
   padding: 15px;
+  margin: 15px 0;
 }
 
-.resume .func .other div {
-  padding: 0 0 15px;
+.resume .func .qualifications ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.resume .func .qualifications li {
+  margin-bottom: 5px;
+}
+
+.resume .func .qualifications a:hover {
+  color: $yellow;
+}
+
+.resume .func .languages {
+  clear: both;
+  background: $darker-blue;
+  padding: 15px;
+  margin: 15px 0 0;
+}
+.resume .func .languages ul {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.resume .func .languages ul li {
+  position: relative;
+}
+.resume .func .languages ul li:hover svg .cbar {
+  stroke: $yellow;
+  stroke-width: 4px;
+}
+.resume .func .languages ul li:hover span,
+.resume .func .languages ul li:hover small {
+  transform: scale(1.2);
+}
+.resume .func .languages ul li svg {
+  width: 95%;
+  fill: transparent;
+  transform: rotate(-90deg);
+}
+.resume .func .languages ul li svg circle {
+  stroke-width: 1px;
+  stroke: $white;
+}
+.resume .func .languages ul li svg .cbar {
+  stroke-width: 3px;
+  stroke: $orange;
+  stroke-linecap: round;
+}
+.resume .func .languages ul li span,
+.resume .func .languages ul li small {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 52%;
+  transition-duration: 0.3s;
+}
+.resume .func .languages ul li span {
+  top: 40%;
 }
