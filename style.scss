@@ -64,7 +64,7 @@ h3 {
 }
 
 .resume {
-  width: 960px;
+  width: min(960px, calc(100% - 32px));
   background: $darkest-blue;
   color: $white;
   margin: 20px auto;
@@ -75,7 +75,7 @@ h3 {
 .resume .base,
 .resume .func {
   box-sizing: border-box;
-  float: left;
+  float: none;
 }
 .resume .base > div,
 .resume .func > div {
@@ -87,6 +87,9 @@ h3 {
 }
 .resume .base {
   width: 35%;
+  flex: 0 0 35%;
+  display: flex;
+  flex-direction: column;
   padding: 30px 15px;
   background: $darker-blue;
   color: $white;
@@ -208,8 +211,75 @@ h3 {
 .resume .base .follow .box i.fa::before {
   display: block;
 }
+.resume .base .site-qr {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.resume .base .site-qr .qr-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: min(220px, 100%);
+  margin: 0 auto;
+  padding: 18px;
+  border: 1px solid rgba($orange, 0.35);
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba($dark-blue, 0.9), rgba($darkest-blue, 0.96));
+  text-align: center;
+}
+
+.resume .base .site-qr .qr-card:hover {
+  border-color: $yellow;
+  background: rgba($black, 0.4);
+}
+
+.resume .base .site-qr img {
+  width: min(132px, 100%);
+  height: auto;
+  padding: 8px;
+  border-radius: 14px;
+  background: transparent;
+  box-shadow: 0 10px 24px rgba($black, 0.2);
+}
+
+.resume .base .site-qr .qr-headline {
+  margin: 0;
+  max-width: 18ch;
+  color: $yellow;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.resume .base .site-qr .qr-copy {
+  max-width: 19ch;
+  color: $white;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.resume .base .site-qr .qr-copy p {
+  margin: 0;
+}
+
+.resume .base .site-qr .qr-copy p + p {
+  margin-top: 10px;
+}
+
+.resume .base .site-qr .qr-copy p:first-child,
+.resume .base .site-qr .qr-copy p:last-child {
+  font-weight: 700;
+}
+
+.resume .base .site-qr .qr-copy p:nth-child(2) {
+  color: rgba($white, 0.82);
+}
 .resume .func {
-  width: 100%;
+  width: auto;
+  flex: 1 1 0;
+  min-width: 0;
   padding: 30px;
 }
 .resume .func:hover > div {
@@ -351,7 +421,7 @@ h3 {
   top: -12px;
   right: calc(100% + 18px);
   width: min(420px, calc(100vw - 80px));
-  padding: 16px 18px;
+  padding: 16px 48px 16px 18px;
   border: 1px solid rgba(255, 179, 0, 0.45);
   border-radius: 12px;
   background: rgba(14, 20, 66, 0.96);
@@ -363,6 +433,33 @@ h3 {
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
   z-index: 10;
   pointer-events: none;
+}
+
+.resume .func .work ul li .job-tooltip-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 179, 0, 0.16);
+  color: $white;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.resume .func .work ul li .job-tooltip-close:hover,
+.resume .func .work ul li .job-tooltip-close:focus {
+  background: $orange;
+  color: $darkest-blue;
+  transform: scale(1.05);
 }
 
 .resume .func .work ul li .job-tooltip::before {
@@ -378,8 +475,9 @@ h3 {
   transform: rotate(45deg);
 }
 
-.resume .func .work ul li:hover .job-tooltip,
-.resume .func .work ul li:focus-within .job-tooltip {
+.resume .func .work ul li:hover:not(.tooltip-dismissed) .job-tooltip,
+.resume .func .work ul li:focus-within:not(.tooltip-dismissed) .job-tooltip,
+.resume .func .work ul li.tooltip-open .job-tooltip {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -645,4 +743,225 @@ h3 {
 }
 .resume .func .languages ul li span {
   top: 40%;
+}
+
+@media (max-width: 980px) {
+  .resume {
+    width: calc(100% - 24px);
+    margin: 12px auto 20px;
+    box-shadow: 0 10px 24px rgba(14, 20, 66, 0.35);
+    flex-direction: column;
+  }
+
+  .resume .base,
+  .resume .func,
+  .resume .func .work,
+  .resume .func .edu {
+    width: 100%;
+  }
+
+  .resume .base,
+  .resume .func {
+    flex: none;
+  }
+
+  .resume .base {
+    padding: 24px 20px;
+  }
+
+  .resume .base .profile {
+    margin: -24px -20px 36px -20px;
+    padding: 24px 20px 34px 20px;
+  }
+
+  .resume .base .profile .photo img {
+    width: min(280px, 72vw);
+  }
+
+  .resume .func {
+    padding: 24px 20px;
+  }
+
+  .resume .func:hover > div:not(:hover) {
+    opacity: 1;
+  }
+
+  .resume .func .edu {
+    margin-right: 0;
+  }
+
+  .resume .func .skills-soft ul,
+  .resume .func .languages ul,
+  .resume .func .interests-items {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .resume .func .skills-soft ul li,
+  .resume .func .languages ul li {
+    width: calc(50% - 12px);
+    max-width: 150px;
+  }
+
+  .resume .func .interests-items div {
+    width: 90px;
+    height: 90px;
+  }
+
+  .resume .func .work ul li .job-tooltip {
+    width: min(100%, calc(100vw - 72px));
+  }
+}
+
+@media (max-width: 640px) {
+  html,
+  body {
+    font-size: 15px;
+  }
+
+  .resume {
+    width: calc(100% - 16px);
+    margin: 8px auto 16px;
+    box-shadow: none;
+  }
+
+  .resume .base {
+    padding: 20px 16px;
+  }
+
+  .resume .base .profile {
+    margin: -20px -16px 28px -16px;
+    padding: 20px 16px 28px 16px;
+  }
+
+  .resume .base .profile::after {
+    height: 24px;
+    bottom: -12px;
+  }
+
+  .resume .base .profile .info .name {
+    font-size: 1.55em;
+  }
+
+  .resume .base .contact div a {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .resume .base .contact div i {
+    margin-right: 0;
+    margin-top: 2px;
+    flex: 0 0 20px;
+  }
+
+  .resume .base .contact div span {
+    word-break: break-word;
+  }
+
+  .resume .base .follow .box i {
+    width: 52px;
+    height: 52px;
+    line-height: 52px;
+    font-size: 26px;
+    margin: 0 6px 10px 6px;
+  }
+
+  .resume .func {
+    padding: 20px 16px;
+  }
+
+  .resume .func h3 i {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    line-height: 36px;
+  }
+
+  .resume .func .work ul li,
+  .resume .func .edu ul li {
+    margin-left: 8px;
+    padding-left: 20px;
+  }
+
+  .resume .func .skills-prog ul {
+    margin-left: 0;
+  }
+
+  .resume .func .skills-prog ul li {
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .resume .func .skills-prog ul li span {
+    width: auto;
+    margin-bottom: 8px;
+  }
+
+  .resume .func .skills-prog ul li .skills-bar {
+    width: 100%;
+  }
+
+  .resume .func .skills-soft ul li,
+  .resume .func .languages ul li {
+    width: calc(50% - 10px);
+    max-width: none;
+  }
+
+  .resume .func .interests-items {
+    gap: 12px;
+    padding-bottom: 0;
+  }
+
+  .resume .func .interests-items div {
+    width: calc(50% - 10px);
+    min-height: 96px;
+    height: auto;
+    padding: 14px 8px;
+    border-radius: 24px;
+  }
+
+  .resume .func .interests-items div i {
+    font-size: 36px;
+    line-height: 48px;
+  }
+
+  .resume .func .work ul li .job-tooltip {
+    display: none;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: auto;
+    margin-top: 12px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .resume .func .work ul li:hover:not(.tooltip-dismissed) .job-tooltip,
+  .resume .func .work ul li.tooltip-open .job-tooltip,
+  .resume .func .work ul li:focus-within:not(.tooltip-dismissed) .job-tooltip {
+    display: block;
+  }
+
+  .resume .func .work ul li .job-tooltip::before {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .resume .base .profile .photo img {
+    width: min(220px, 72vw);
+  }
+
+  .resume .func .skills-soft ul li,
+  .resume .func .languages ul li,
+  .resume .func .interests-items div {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
 }
